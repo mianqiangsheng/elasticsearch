@@ -34,96 +34,137 @@
         </dependency>
 
 <!--        <dependency>-->
-<!--            <groupId>org.springframework.data.build</groupId>-->
-<!--            <artifactId>spring-data-parent</artifactId>-->
-<!--            <version>2.4.4</version>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-tx</artifactId>-->
 <!--        </dependency>-->
+
+<!--        &lt;!&ndash; SPRING DATA &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.data</groupId>-->
+<!--            <artifactId>spring-data-commons</artifactId>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; APACHE &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>commons-lang</groupId>-->
+<!--            <artifactId>commons-lang</artifactId>-->
+<!--            <version>${commonslang}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Elasticsearch &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch</groupId>-->
+<!--            <artifactId>elasticsearch</artifactId>-->
+<!--            <version>${elasticsearch}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.client</groupId>-->
+<!--            <artifactId>transport</artifactId>-->
+<!--            <version>${elasticsearch}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            &lt;!&ndash; required by elasticsearch &ndash;&gt;-->
+<!--            <groupId>org.elasticsearch.plugin</groupId>-->
+<!--            <artifactId>transport-netty4-client</artifactId>-->
+<!--            <version>${elasticsearch}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.client</groupId>-->
+<!--            <artifactId>elasticsearch-rest-high-level-client</artifactId>-->
+<!--            <version>${elasticsearch}</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>commons-logging</groupId>-->
+<!--                    <artifactId>commons-logging</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--        -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-core</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>4.1.7</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <artifactId>spring-webflux</artifactId>
+            <version>5.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor.netty</groupId>
+            <artifactId>reactor-netty-http</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <!-- JODA Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.10</version>
+        </dependency>
+
+        <!-- CDI -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- SPRING DATA -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-        </dependency>
-
-        <!-- APACHE -->
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${commonslang}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Elasticsearch -->
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>${elasticsearch}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>transport</artifactId>
-            <version>${elasticsearch}</version>
-        </dependency>
-
-        <dependency>
-            <!-- required by elasticsearch -->
-            <groupId>org.elasticsearch.plugin</groupId>
-            <artifactId>transport-netty4-client</artifactId>
-            <version>${elasticsearch}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>${elasticsearch}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <scope>test</scope>
+            <version>2.5.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-bom</artifactId>
-                <version>${netty}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.elasticsearch.plugin</groupId>
-                <artifactId>transport-netty4-client</artifactId>
-                <version>${elasticsearch}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.elasticsearch</groupId>
-                <artifactId>elasticsearch</artifactId>
-                <version>${elasticsearch}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.elasticsearch.client</groupId>
-                <artifactId>elasticsearch-rest-client</artifactId>
-                <version>7.12.0</version>
-                <scope>compile</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+<!--    <dependencyManagement>-->
+<!--        <dependencies>-->
+<!--            <dependency>-->
+<!--                <groupId>io.netty</groupId>-->
+<!--                <artifactId>netty-bom</artifactId>-->
+<!--                <version>${netty}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch.plugin</groupId>-->
+<!--                <artifactId>transport-netty4-client</artifactId>-->
+<!--                <version>${elasticsearch}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch</groupId>-->
+<!--                <artifactId>elasticsearch</artifactId>-->
+<!--                <version>${elasticsearch}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch.client</groupId>-->
+<!--                <artifactId>elasticsearch-rest-client</artifactId>-->
+<!--                <version>${elasticsearch}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch</groupId>-->
+<!--                <artifactId>elasticsearch-core</artifactId>-->
+<!--                <version>${elasticsearch}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
+<!--        </dependencies>-->
+<!--    </dependencyManagement>-->
 
     <build>
         <plugins>
