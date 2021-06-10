@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
+<!--
+debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。(为true时和上面在MyApp1的main方法加入的两行代码效果相同)
+scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+packagingData：当此属性设置为true时，logback可以包含它输出的堆栈跟踪行的每一行的打包数据。打包数据由jar文件的名称和版本组成，而这个jar文件是由堆栈跟踪线的类产生的。默认值为false。
+ -->
+<configuration debug="true" scan="true" scanPeriod="10 seconds" packagingData="true">
+    <!-- 定义日志记录器的上下文名称，可以让不同的应用程序日志记录器记录到同一个文件中，用myAppName来区分信息 -->
+<!--    <contextName>myAppName</contextName>-->
+
+<!--    <property name="USER_HOME" value="d:/test/logs" />-->
+
+<!--    &lt;!&ndash; 输出到控制台 &ndash;&gt;-->
+<!--    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        &lt;!&ndash; encoders are assigned the type-->
+<!--             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default &ndash;&gt;-->
+<!--        &lt;!&ndash; 按以下格式输出日志信息 &ndash;&gt;-->
+<!--        <encoder>-->
+<!--            <pattern>%contextName %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--            <charset>UTF-8</charset>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    &lt;!&ndash; Insert the current time formatted as "yyyyMMdd'T'HHmmss" under-->
+<!--       the key "bySecond" into the logger context. This value will be-->
+<!--       available to all subsequent configuration elements. &ndash;&gt;-->
+<!--    &lt;!&ndash; 设置一个日期格式，可以在其他需要的地方使用 &ndash;&gt;-->
+<!--&lt;!&ndash;    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>&ndash;&gt;-->
+<!--    <timestamp key="bySecond" datePattern="yyyyMMdd"/>-->
+
+<!--    &lt;!&ndash; 输出到文件 &ndash;&gt;-->
+<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--        &lt;!&ndash; 指定文件地址，这里使用bySecond，每次启动项目都会输出到新的日志文件中 &ndash;&gt;-->
+<!--        <file>${USER_HOME}/log-${bySecond}.log</file>-->
+<!--        &lt;!&ndash; 累计追加记录到文件 &ndash;&gt;-->
+<!--        <append>true</append>-->
+<!--        &lt;!&ndash; levelfilter:级别过滤器。根据日志级别进行过滤。如果日志级别等于配置级别level，则执行onMatch的；否则执行onMismatch &ndash;&gt;-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>INFO</level>-->
+<!--            &lt;!&ndash; onMatch、onMismatch里内容要大写 &ndash;&gt;-->
+<!--            &lt;!&ndash; DENY：日志将立即被抛弃，不再经过其他过滤器，本appender也不进行处理 &ndash;&gt;-->
+<!--            &lt;!&ndash; ACCEPT：日志被立即处理，不再经过其他过滤器 &ndash;&gt;-->
+<!--            &lt;!&ndash; NEUTRAL：下一个过滤器继续过滤，若为最后一个过滤器且通过，则appender进行处理 &ndash;&gt;-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>NEUTRAL</onMismatch>-->
+<!--        </filter>-->
+
+<!--        &lt;!&ndash; ThresholdFilter临界值过滤器，过滤掉低于指定临界值的日志 &ndash;&gt;-->
+<!--        &lt;!&ndash; 当日志级别等于或高于临界值时，过滤器返回NEUTRAL；当日志级别低于临界值时，日志会被拒绝。 &ndash;&gt;-->
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>INFO</level>-->
+<!--        </filter>-->
+
+<!--        &lt;!&ndash; set immediateFlush to false for much higher logging throughput &ndash;&gt;-->
+<!--        <immediateFlush>true</immediateFlush>-->
+<!--        &lt;!&ndash; encoders are assigned the type-->
+<!--             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default &ndash;&gt;-->
+<!--        <encoder>-->
+<!--            <pattern>%contextName %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+<!--            <charset>UTF-8</charset>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    <appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        &lt;!&ndash;<file>d:/test/logs/logFile.log</file>&ndash;&gt;-->
+<!--        &lt;!&ndash;按日期对文件进行存档&ndash;&gt;-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; daily rollover &ndash;&gt;-->
+<!--            <fileNamePattern>${USER_HOME}/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+<!--            &lt;!&ndash; secondly rollover &ndash;&gt;-->
+<!--            &lt;!&ndash;<fileNamePattern>d:/test/logs/logFile.%d{yyyyMMddHHmmss}.log</fileNamePattern>&ndash;&gt;-->
+
+<!--            &lt;!&ndash; keep 30 days' worth of history capped at 3GB total size &ndash;&gt;-->
+<!--            &lt;!&ndash; 归档文件的最大数量的保存，删除旧文件异步之前。 &ndash;&gt;-->
+<!--            <maxHistory>30</maxHistory>-->
+<!--            &lt;!&ndash; 所有归档文件的总大小。当超过了总大小上限时，将异步删除最老的文件。 &ndash;&gt;-->
+<!--            <totalSizeCap>3GB</totalSizeCap>-->
+<!--        </rollingPolicy>-->
+
+<!--        &lt;!&ndash; 按日期对文件进行存档，但同时限制每个日志文件的大小 &ndash;&gt;-->
+<!--        &lt;!&ndash;<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">&ndash;&gt;-->
+<!--            &lt;!&ndash;&lt;!&ndash; rollover daily &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash;<fileNamePattern>d:/test/logs/mylog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>&ndash;&gt;-->
+<!--            &lt;!&ndash;&lt;!&ndash; each file should be at most 100MB, keep 60 days worth of history, but at most 20GB &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash;<maxFileSize>100MB</maxFileSize>&ndash;&gt;-->
+<!--            &lt;!&ndash;<maxHistory>60</maxHistory>&ndash;&gt;-->
+<!--            &lt;!&ndash;<totalSizeCap>20GB</totalSizeCap>&ndash;&gt;-->
+<!--        &lt;!&ndash;</rollingPolicy>&ndash;&gt;-->
+
+<!--        <encoder>-->
+<!--            <pattern>%contextName %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+<!--            <charset>UTF-8</charset>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    &lt;!&ndash; name指定某个包或者某个类的日志输出，additivity如果是false，表示不追加日志信息到<root>节点的其他appender中去；-->
+<!--    如果是true，表示将输出到STDOUT这个appender中的日志信息会输出到FILE、ROLLINGFILE这些appender中去。-->
+<!--    另外，如果<root>节点中也有STDOUT这个appender，则会输出2遍。-->
+<!--    最后，logger中的日志等级level会覆盖<root>节点的level，多个<logger>后面的会覆盖前面的level;-->
+<!--    而<appender>节点中的filter属性如果也对日志级别进行筛选，按以下原则操作：<logger>定义的level级别如果低于filter属性-->
+<!--    （比如debug<warn），则会通过filter进行过滤；如果大于，则按<logger>定义的level级别进行输出&ndash;&gt;-->
+<!--    <logger name="test" level="debug" additivity="true" >-->
+<!--        <appender-ref ref="STDOUT"/>-->
+<!--    </logger>-->
+<!--    <logger name="test" level="debug" additivity="true" >-->
+<!--        <appender-ref ref="FILE"/>-->
+<!--    </logger>-->
+
+<!--    <root level="ERROR">-->
+<!--        &lt;!&ndash;<appender-ref ref="STDOUT" />&ndash;&gt;-->
+<!--        &lt;!&ndash;<appender-ref ref="FILE" />&ndash;&gt;-->
+<!--        <appender-ref ref="ROLLINGFILE" />-->
+<!--    </root>-->
+
+<!--    <encoder class="co.elastic.logging.logback.EcsEncoder">-->
+<!--        <serviceName>my-application</serviceName>-->
+<!--        <stackTraceAsArray>true</stackTraceAsArray>-->
+<!--    </encoder>-->
+
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+    <include resource="co/elastic/logging/logback/boot/ecs-file-appender.xml" />
+
+<!--    <appender name="FILE" class="com.lizhen.elasticsearch.log.MyRollingFileAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>${FILE_LOG_PATTERN}</pattern>-->
+<!--            <charset>${FILE_LOG_CHARSET}</charset>-->
+<!--        </encoder>-->
+<!--        <file>${LOG_FILE}</file>-->
+<!--        <append>false</append>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>${LOGBACK_ROLLINGPOLICY_FILE_NAME_PATTERN:-${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz}</fileNamePattern>-->
+<!--            <cleanHistoryOnStart>${LOGBACK_ROLLINGPOLICY_CLEAN_HISTORY_ON_START:-false}</cleanHistoryOnStart>-->
+<!--            <maxFileSize>${LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE:-10MB}</maxFileSize>-->
+<!--            <totalSizeCap>${LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP:-0}</totalSizeCap>-->
+<!--            <maxHistory>${LOGBACK_ROLLINGPOLICY_MAX_HISTORY:-7}</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
+
+<!--    <springProperty name="SERVICE_NAME" source="spring.application.name"/>-->
+<!--    <appender name="ECS_JSON_FILE" class="com.lizhen.elasticsearch.log.MyRollingFileAppender">-->
+<!--        <encoder class="co.elastic.logging.logback.EcsEncoder">-->
+<!--            <serviceName>${SERVICE_NAME:-spring-boot-application}</serviceName>-->
+<!--        </encoder>-->
+<!--        <file>${LOG_FILE}.json</file>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            <cleanHistoryOnStart>${LOG_FILE_CLEAN_HISTORY_ON_START:-false}</cleanHistoryOnStart>-->
+<!--            <fileNamePattern>${ROLLING_FILE_NAME_PATTERN:-${LOG_FILE}.json.%d{yyyy-MM-dd}.%i.gz}</fileNamePattern>-->
+<!--            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>-->
+<!--            <maxHistory>${LOG_FILE_MAX_HISTORY:-7}</maxHistory>-->
+<!--            <totalSizeCap>${LOG_FILE_TOTAL_SIZE_CAP:-0}</totalSizeCap>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ECS_JSON_FILE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

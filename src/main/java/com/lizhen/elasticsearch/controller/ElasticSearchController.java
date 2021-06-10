@@ -1,5 +1,6 @@
 package com.lizhen.elasticsearch.controller;
 
+import io.swagger.annotations.Api;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/es")
+@Api(value = "/es", tags = "操作Elasticsearch")
 public class ElasticSearchController {
 
     @Resource
