@@ -35,8 +35,9 @@ pipeline {
         stage('Run') {
             steps {
                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
-                   sh 'chmod 745 ./mvnw'
-                   sh 'nohup ./mvnw spring-boot:run -Dserver.port=8081 &'
+               sh """
+               	   nohup java -jar target/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &
+               	  """
                }
             }
         }
