@@ -7,7 +7,7 @@ pipeline {
 //         }
 //     }
     agent { none }
-//     stages {
+    stages {
 //         stage('Build') {
 //             steps {
 //                 sh 'mvn -B -DskipTests clean package'
@@ -23,22 +23,22 @@ pipeline {
                 sh 'mvn -B clean package'
             }
         }
-//         stage('Test') {
-//             steps {
-//                 sh 'mvn test'
-//             }
-//             post {
-//                 always {
-//                     junit 'target/surefire-reports/*.xml'
-//                 }
-//             }
-//         }
-//         stage('Deliver') {
-//             steps {
-//                 sh 'chmod 745 ./deliver.sh'
-//                 sh './deliver.sh'
-//             }
-//         }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh 'chmod 745 ./deliver.sh'
+                sh './deliver.sh'
+            }
+        }
         stage('Run') {
             agent { node { label 'slave_node' } }
             steps {
