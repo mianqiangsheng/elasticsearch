@@ -21,12 +21,15 @@ pipeline {
                sh 'echo PATH is $PATH'
                sh 'java -version'
 
-               PROCESS_ID = sh (script: "ps -ef|grep elasticsearch-0.0.1-SNAPSHOT | awk '\$8 ~ /java/ {print \$2}'", returnStdout: true).trim()
-               echo "PROCESS_ID=" + PROCESS_ID
-               if (PROCESS_ID != "") {
-                   sh 'echo Kill process: ${PROCESS_ID}'
-                   sh 'kill -9 ${PROCESS_ID}'
-               }
+               sh '''
+                   PROCESS_ID=$(ps -ef|grep elasticsearch-0.0.1-SNAPSHOT | awk '$8 ~ /java/ {print $2}')
+                   echo "PROCESS_ID="  $PROCESS_ID
+                   if [ $PROCESS_ID != "" ]
+                   then
+                     echo Kill process: $PROCESS_ID
+                     kill -9 $PROCESS_ID
+                   fi
+               '''
 
                sh 'cp /root/jenkins/workspace/test_dev/target/elasticsearch-0.0.1-SNAPSHOT.jar /root/jenkins/elasticsearch-0.0.1-SNAPSHOT.jar'
                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
