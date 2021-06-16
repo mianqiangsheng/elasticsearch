@@ -8,8 +8,12 @@ pipeline {
     }
     stages {
         stage('Build') {
+//             steps {
+//                 sh 'mvn -B -DskipTests clean package'
+//             }
+        stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B clean package'
             }
         }
 //         stage('Test') {
@@ -22,11 +26,11 @@ pipeline {
 //                 }
 //             }
 //         }
-//         stage('Deliver') {
-//             steps {
-//                 sh 'chmod 745 ./deliver.sh'
-//                 sh './deliver.sh'
-//             }
-//         }
+        stage('Deliver') {
+            steps {
+                sh 'chmod 745 ./deliver.sh'
+                sh './deliver.sh'
+            }
+        }
     }
 }
