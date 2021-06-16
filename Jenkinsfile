@@ -1,17 +1,6 @@
 pipeline {
-//     agent {
-//         docker {
-//             image 'maven:3.6.3-jdk-8'
-//             label 'slave_node'
-//             args '-v /root/.m2:/root/.m2'
-//         }
-//     }
     agent { none }
     stages {
-//         stage('Build') {
-//             steps {
-//                 sh 'mvn -B -DskipTests clean package'
-//             }
         stage('Build') {
             agent {
                 docker {
@@ -21,6 +10,7 @@ pipeline {
                 }
             steps {
                 sh 'mvn -B clean package'
+                }
             }
         }
         stage('Test') {
@@ -31,12 +21,6 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh 'chmod 745 ./deliver.sh'
-                sh './deliver.sh'
             }
         }
         stage('Run') {
