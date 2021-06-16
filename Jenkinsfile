@@ -22,9 +22,9 @@ pipeline {
                sh 'java -version'
 //                sh 'java -jar /root/elasticsearch-0.0.1-SNAPSHOT.jar'
                sh 'cp /root/jenkins/workspace/test_dev/target/elasticsearch-0.0.1-SNAPSHOT.jar /root/elasticsearch-0.0.1-SNAPSHOT.jar'
-               withEnv(['JENKINS_NODE_COOKIE=background_job']) {
+//                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
                sh 'nohup java -jar /root/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &'
-               }
+//                }
             }
         }
     }
