@@ -1,31 +1,38 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.6.3-jdk-8'
-            label 'slave_node'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
+//     agent {
+//         docker {
+//             image 'maven:3.6.3-jdk-8'
+//             label 'slave_node'
+//             args '-v /root/.m2:/root/.m2'
+//         }
+//     }
+    agent { none }
+//     stages {
 //         stage('Build') {
 //             steps {
-//                 sh 'mvn -B clean package'
+//                 sh 'mvn -B -DskipTests clean package'
 //             }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
+        stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-jdk-8'
+                    label 'slave_node'
+                    args '-v /root/.m2:/root/.m2'
                 }
+            steps {
+                sh 'mvn -B clean package'
             }
         }
+//         stage('Test') {
+//             steps {
+//                 sh 'mvn test'
+//             }
+//             post {
+//                 always {
+//                     junit 'target/surefire-reports/*.xml'
+//                 }
+//             }
+//         }
 //         stage('Deliver') {
 //             steps {
 //                 sh 'chmod 745 ./deliver.sh'
