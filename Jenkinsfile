@@ -24,7 +24,7 @@ pipeline {
                sh '''
                    PROCESS_ID=$(ps -ef|grep elasticsearch-0.0.1-SNAPSHOT | awk '$8 ~ /java/ {print $2}')
                    echo "PROCESS_ID="  $PROCESS_ID
-                   if [ $PROCESS_ID != "" ]
+                   if [ "$PROCESS_ID" != "" ]
                    then
                      echo Kill process: $PROCESS_ID
                      kill -9 $PROCESS_ID
