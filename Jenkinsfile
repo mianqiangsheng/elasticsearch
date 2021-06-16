@@ -26,10 +26,15 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+//         stage('Deliver') {
+//             steps {
+//                 sh 'chmod 745 ./deliver.sh'
+//                 sh './deliver.sh'
+//             }
+//         }
+        stage('Run') {
             steps {
-                sh 'chmod 745 ./deliver.sh'
-                sh './deliver.sh'
+                sh "'nohup java -jar target/${NAME}-${VERSION}.jar >/dev/null 2>&1 &'"
             }
         }
     }
