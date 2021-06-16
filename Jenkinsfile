@@ -4,7 +4,7 @@ pipeline {
         stage('Example Build') {
             agent {
                 docker {
-                    image 'maven:3-alpine'
+                    image 'maven:3.6.3-jdk-8'
                     label 'slave_node'
                     args '-v /root/.m2:/root/.m2'
                 }
@@ -18,9 +18,9 @@ pipeline {
             steps {
                sh 'echo JAVA_HOME is $JAVA_HOME'
                sh 'echo PATH is $PATH'
-               sh 'JAVA_HOME=/usr/local/src/jdk1.8.0_281'
-               sh 'CLASS_PATH=$JAVA_HOME/lib'
-               sh 'PATH=$PATH:$JAVA_HOME/bin'
+               sh 'ENV JAVA_HOME=/usr/local/src/jdk1.8.0_281'
+               sh 'ENV CLASS_PATH=$JAVA_HOME/lib'
+               sh 'ENV PATH=$PATH:$JAVA_HOME/bin'
                sh 'export PATH JAVA_HOME CLASSPATH'
                sh 'echo JAVA_HOME is $JAVA_HOME'
                sh 'echo PATH is $PATH'
