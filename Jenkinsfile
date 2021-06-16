@@ -35,6 +35,7 @@ pipeline {
         stage('Run') {
             steps {
                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
+                   sh 'chmod 745 ./mvnw'
                    sh 'nohup ./mvnw spring-boot:run -Dserver.port=8081 &'
                }
             }
