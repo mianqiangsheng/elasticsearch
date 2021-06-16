@@ -34,7 +34,11 @@ pipeline {
 //         }
         stage('Run') {
             steps {
-                sh '"nohup java -jar target/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &"'
+               sh "pid=\$(lsof -i:8081 -t); kill -TERM \$pid "
+                                 + "|| kill -KILL \$pid"
+               withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                   sh 'nohup ./mvnw spring-boot:run -Dserver.port=8081 &'
+               }
             }
         }
     }
