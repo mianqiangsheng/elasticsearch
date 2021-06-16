@@ -2,10 +2,12 @@ pipeline {
     agent none
     stages {
         stage('Example Build') {
-            docker {
-                image 'maven:3.6.3-jdk-8'
-                label 'slave_node'
-                args '-v /root/.m2:/root/.m2'
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    label 'main'
+                    args '-v /root/.m2:/root/.m2'
+                }
             }
             steps {
                 sh 'mvn -B clean package'
