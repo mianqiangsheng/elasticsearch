@@ -35,7 +35,7 @@ pipeline {
         stage('Run') {
             steps {
                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
-               sh '"nohup java -jar /root/jenkins/workspace/test_dev/target/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &"'
+               sh "'nohup java -jar /root/jenkins/workspace/test_dev/target/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &'"
                }
             }
         }
