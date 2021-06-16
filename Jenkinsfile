@@ -15,14 +15,11 @@ pipeline {
 //         }
         stage('Example Run') {
             agent { node { label 'slave_node' } }
-            environment {
-               JAVA_HOME = '/usr/local/src/jdk1.8.0_281'
-               PATH='${env.JAVA_HOME}/bin:${env.PATH}'
-            }
             steps {
                sh 'printenv'
                sh 'echo JAVA_HOME is $JAVA_HOME'
                sh 'echo PATH is $PATH'
+               sh 'java -version'
 //                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
 //                sh '"nohup java -jar /root/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &"'
 //                }
