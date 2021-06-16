@@ -34,7 +34,7 @@ pipeline {
 //         }
         stage('Run') {
             steps {
-                sh 'nohup java -jar target/${NAME}-${VERSION}.jar >/dev/null 2>&1 &'
+                sh 'nohup java -jar target/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &'
             }
         }
     }
