@@ -21,7 +21,7 @@ pipeline {
                sh 'echo PATH is $PATH'
                sh 'java -version'
 
-               PROCESS_ID = sh (script: "ps -ef|grep elasticsearch-0.0.1-SNAPSHOT | awk '$8 ~ /java/ {print $2}'", returnStdout: true).trim()
+               PROCESS_ID = sh (script: "ps -ef|grep elasticsearch-0.0.1-SNAPSHOT | awk '\$8 ~ /java/ {print \$2}'", returnStdout: true).trim()
                echo "PROCESS_ID=" + PROCESS_ID
                if (PROCESS_ID != "") {
                    sh 'echo Kill process: ${PROCESS_ID}'
