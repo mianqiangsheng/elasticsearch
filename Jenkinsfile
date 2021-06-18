@@ -1,6 +1,9 @@
 // pipeline 关闭已经启动的java服务，拷贝maven打的jar包并后台运行
 pipeline {
     agent { node { label 'linux_1 && slave_node && docker' } }
+    tools {
+            maven 'linux_maven'
+        }
     stages {
         stage('Build') {
             steps {
