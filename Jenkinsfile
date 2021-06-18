@@ -25,7 +25,7 @@ pipeline {
                    docker push $REPOSITORY
                '''
                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
-               sh 'docker run -dp 8081:8081 --name elasticsearch $REPOSITORY'
+               sh 'docker run -dp 8081:8081 --name elasticsearch -v /root/jenkins/workspace/esLog:/usr/local/myapplication/log $REPOSITORY'
                }
             }
         }
