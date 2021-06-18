@@ -3,6 +3,7 @@ pipeline {
     agent { node { label 'linux_1 && slave_node && docker' } }
     tools {
             maven 'linux_maven'
+            jdk 'linux_jdk8'
         }
     stages {
         stage('Build') {
