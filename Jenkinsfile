@@ -1,40 +1,27 @@
+// pipeline 关闭已经启动的java服务，拷贝maven打的jar包并后台运行
 pipeline {
-    agent none
+    agent { node { label 'linux_1 && slave_node && docker' } }
     stages {
-        stage('Example Build') {
-            agent {
-                docker {
-                    image 'maven:3.6.3-jdk-8'
-                    label 'slave_node'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
+        stage('Build') {
             steps {
                 sh 'mvn -B clean package'
             }
         }
-        stage('Example Run') {
-            agent { node { label 'slave_node' } }
+        stage('Dockerize') {
+            environment {
+                    REPOSITORY='myregistry.domain.com/elasticsearch:1.0.0'
+                }
             steps {
                sh 'printenv'
-               sh 'echo JAVA_HOME is $JAVA_HOME'
-               sh 'echo PATH is $PATH'
-               sh 'java -version'
 
                sh '''
-                   PROCESS_ID=$(ps -ef|grep elasticsearch-0.0.1-SNAPSHOT | awk '$8 ~ /java/ {print $2}')
-                   echo "PROCESS_ID="  $PROCESS_ID
-                   if [ "$PROCESS_ID" != "" ]
-                   then
-                     echo Kill process: $PROCESS_ID
-                     kill -9 $PROCESS_ID
-                   fi
+                   docker rm -f elasticsearch
+                   docker image rm -f $REPOSITORY
+                   docker build -t $REPOSITORY ./
+                   docker push $REPOSITORY
                '''
-
-               sh 'cp /root/jenkins/workspace/test_dev/target/elasticsearch-0.0.1-SNAPSHOT.jar /root/jenkins/elasticsearch-0.0.1-SNAPSHOT.jar'
                withEnv(['JENKINS_NODE_COOKIE=background_job']) {
-//                sh 'nohup java -jar /root/jenkins/workspace/test_dev/target/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &'
-               sh 'nohup java -jar /root/jenkins/elasticsearch-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &'
+               sh 'docker run -dp 8081:8081 -name elasticsearch $REPOSITORY'
                }
             }
         }
